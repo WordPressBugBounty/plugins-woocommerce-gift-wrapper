@@ -256,23 +256,6 @@ final class The_Gift_Wrapper {
 			wp_enqueue_script( 'wcgiftwrap-admin-js' );
 		}
 
-		// Deactivation feedback
-		if ( 'plugins.php' === $hook_suffix ) {
-
-			add_thickbox();
-
-			wp_enqueue_script( 'wcgiftwrap-admin-js' );
-
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			wp_enqueue_style( 'wcgwp-admin-css',
-				plugins_url( '/assets/css/admin' . $suffix . '.css', GIFTWRAPPER_PLUGIN_FILE ),
-				[],
-				GIFTWRAPPER_VERSION,
-				'screen'
-			);
-
-		}
-
 	}
 
 	/**
