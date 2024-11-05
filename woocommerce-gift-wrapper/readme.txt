@@ -1,21 +1,18 @@
 === Gift Wrapper for WooCommerce ===
 Plugin URI: https://giftwrapper.app/
-Contributors: littlepackage
-Donate link: https://paypal.me/littlepackage
+Contributors: cagdasdag, wpcenter
 Tags: woocommerce, wrap, gift, add-on, upsell
 Requires at least: 6.0
 Requires PHP: 7.4
-Tested up to: 6.6
-Stable tag: 6.1.10
+Tested up to: 6.7
+Stable tag: 6.2.0
 License: GPLv3 or later
 
 Holidays and birthdays are always coming! Offer to gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
 
 == Description ==
 
-### The Gift Wrapper is no longer in active development. There are no plans to make it compatible with WC blocks. If you are a developer and would like to contribute, please get in touch. ###
-
-The Gift Wrapper treats your wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PLUS version of The Gift Wrapper](https://www.giftwrapper.app "Gift Wrapper Plus plugin") from Little Package (not to be confused with a similarly-named but different plugin sold by Woocommerce since March 2020).
+The Gift Wrapper treats your wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PLUS version of The Gift Wrapper](https://www.giftwrapper.app "Gift Wrapper Plus plugin").
 
 = Some Features =
 
@@ -48,11 +45,7 @@ The Gift Wrapper treats your wrapping service as a WooCommerce product, allowing
 
 = Support future development =
 
-I need your support & encouragement! If you have found this free plugin useful, and *especially if you have benefited commercially from using Gift Wrapper*, please consider donating to support the plugin's future on the WP repository:
-
-[paypal.me/littlepackage](https://paypal.me/littlepackage?country.x=US&locale.x=en_US "Send Caroline a small tip")
-
-I understand you have a budget and might not be able to afford to pay the developer (me) a small tip in thanks. Maybe you can **leave a positive review**?
+Maybe you can **leave a positive review**?
 
 [Please leave a review of the Gift Wrapper free version](https://wordpress.org/support/plugin/woocommerce-gift-wrapper/reviews "Leave a Review of the Gift Wrapper")
 
