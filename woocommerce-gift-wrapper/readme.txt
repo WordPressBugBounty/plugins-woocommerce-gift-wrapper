@@ -5,7 +5,7 @@ Tags: woocommerce, wrap, gift, add-on, upsell
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 6.2.1
+Stable tag: 6.2.2
 License: GPLv3 or later
 
 Holidays and birthdays are always coming! Offer to gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
