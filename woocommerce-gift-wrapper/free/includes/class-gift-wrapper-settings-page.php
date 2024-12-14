@@ -313,6 +313,14 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 			'autoload'          => false
 		];
 		$settings[] = [
+			'id'                => 'wcgwp_strings[wrap_limit]',
+			'name'              => __( 'You can only add %s %s to your cart.', 'woocommerce-gift-wrapper-plus' ),
+			'type'              => 'text',
+			'default'           => 'You can only add %s %s to your cart.',
+			'class'             => 'wcgwp-plus',
+			'autoload'          => false
+		];
+		$settings[] = [
 			'id'                => 'wcgwp_strings[wrap_details]',
 			'name'              => __( 'We offer the following gift wrap options:', 'woocommerce-gift-wrapper' ),
             'desc'              => __( 'Optional text to give any details or conditions of your gift wrap', 'woocommerce-gift-wrapper' ),

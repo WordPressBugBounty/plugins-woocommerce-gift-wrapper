@@ -1,0 +1,11 @@
+{
+    "apiVersion": 2,
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "version": "1.0.0",
+    "name": "wcgw/gift-wrapper",
+    "title": "Gift Wrapper",
+    "description": "WooCommerce Gift Wrapper Block",
+    "keywords": ["woocommerce", "gift", "wrapper"],
+    "editorScript": "file:./index.js",
+    "icon": ""
+}

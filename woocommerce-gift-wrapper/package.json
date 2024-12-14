@@ -1,0 +1,14 @@
+{
+    "name": "woocommerce-gift-wrapper",
+    "version": "1.0.0",
+    "author": "WP Center",
+    "scripts": {
+        "start": "wp-scripts start",
+        "build": "wp-scripts build"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^24"
+    },
+    "license": "GPL-3.0-or-later",
+    "description": "Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!"
+}

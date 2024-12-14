@@ -41,6 +41,7 @@ class WCGWP_Strings {
 				'add_wrap_for_x'    => 'Add gift wrapping for %s?',
 				'add_x'             => 'Add %s?',
 				'add_x_for_x'       => 'Add %s for %s?',
+				'wrap_limit' => 'You can only add %s %s to your cart.',
 				'wrap_details'      => 'We offer the following gift wrap options:',
 				'wrap_offerings'    => 'We offer the following gift wrap options:',
 				'note'              => 'Note',
@@ -70,6 +71,7 @@ class WCGWP_Strings {
 
 		$strings = (array) get_option( 'wcgwp_strings', [] );
 		if ( empty( $strings ) ) {
+			$strings = $this->get_default_strings();
 			$this->save_default_strings();
 		}
 		if ( ! isset( $strings[ $key ] ) ) {

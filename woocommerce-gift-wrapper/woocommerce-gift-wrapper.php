@@ -4,7 +4,7 @@
  * Plugin Name: Gift Wrapper
  * Plugin URI: https://www.giftwrapper.app
  * Description: Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!
- * Version: 6.2.2
+ * Version: 6.2.3
  * WC requires at least: 5.6
  * WC tested up to: 9.3
  * Author: Gift Wrapper
@@ -30,27 +30,29 @@
  * Thank you!
  *
  */
+use GiftWrapper\WoocommerceGiftWrapper;
 defined( 'ABSPATH' ) || exit;
 if ( !defined( 'GIFTWRAPPER_VERSION' ) ) {
-    define( 'GIFTWRAPPER_VERSION', '6.2.2' );
+    define( 'GIFTWRAPPER_VERSION', '6.2.3' );
 }
-/**
- * Declare compatibility with HPOS
- * @return void
- */
-add_action( 'before_woocommerce_init', function () {
-    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
-    }
-} );
-if ( !function_exists( 'wcgw_fs' ) ) {
+if ( !defined( 'GIFTWRAPPER_FILE' ) ) {
+    define( 'GIFTWRAPPER_FILE', __FILE__ );
+}
+if ( !defined( 'GIFTWRAPPER_PATH' ) ) {
+    define( 'GIFTWRAPPER_PATH', plugin_dir_path( __FILE__ ) );
+}
+if ( !defined( 'GIFTWRAPPER_URL' ) ) {
+    define( 'GIFTWRAPPER_URL', plugin_dir_url( __FILE__ ) );
+}
+if ( function_exists( 'wcgw_fs' ) ) {
+    wcgw_fs()->set_basename( false, __FILE__ );
+} else {
     // Create a helper function for easy SDK access.
     function wcgw_fs() {
         global $wcgw_fs;
         if ( !isset( $wcgw_fs ) ) {
             // Include Freemius SDK.
-            require_once dirname( __FILE__ ) . '/freemius/start.php';
+            require_once dirname( __FILE__ ) . '/vendor/freemius/wordpress-sdk/start.php';
             $wcgw_fs = fs_dynamic_init( array(
                 'id'             => '16940',
                 'slug'           => 'woocommerce-gift-wrapper',
@@ -80,6 +82,16 @@ if ( !function_exists( 'wcgw_fs' ) ) {
     wcgw_fs();
     // Signal that SDK was initiated.
     do_action( 'wcgw_fs_loaded' );
+    require_once __DIR__ . '/vendor/autoload.php';
+    /**
+     * Declare compatibility with HPOS
+     * @return void
+     */
+    add_action( 'before_woocommerce_init', function () {
+        if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+        }
+    } );
     function wcgw_fs_settings_url() {
         return admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper' );
     }
@@ -89,4 +101,5 @@ if ( !function_exists( 'wcgw_fs' ) ) {
     wcgw_fs()->add_filter( 'after_connect_url', 'wcgw_fs_settings_url' );
     wcgw_fs()->add_filter( 'after_pending_connect_url', 'wcgw_fs_settings_url' );
     require_once 'free/woocommerce-gift-wrapper.php';
+    new WoocommerceGiftWrapper();
 }

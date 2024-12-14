@@ -5,7 +5,7 @@ Tags: woocommerce, wrap, gift, add-on, upsell
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 6.2.2
+Stable tag: 6.2.3
 License: GPLv3 or later
 
 Holidays and birthdays are always coming! Offer to gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
@@ -257,6 +257,10 @@ Please [write for support](https://wordpress.org/support/plugin/woocommerce-gift
 * New v6 templates allow for AJAX add gift wrap to cart, more seamless transition to Gift Wrapper Plus. If you are using Gift Wrapper template overrides in your theme, you will want to make backups and update to 6.0 with caution, testing the cart with your theme overrides.
 
 == Changelog ==
+
+= 6.2.3 - 14.12.2024 =
+* New: WooCommere Gutenberg Block compatibility added
+* Update: Freemius integration completed
 
 = 6.1.10 =
 * Fix - JS for vanilla Modal display

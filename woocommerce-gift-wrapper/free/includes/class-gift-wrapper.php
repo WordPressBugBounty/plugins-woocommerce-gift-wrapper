@@ -210,11 +210,10 @@ final class The_Gift_Wrapper {
 	public function elementor_frontend_scripts() {
 
 		// Kane Cohen's vanilla modal script
-		wp_register_script( 'wcgwp-modal', plugins_url( '/assets/js/modal-vanilla/modal.min.js', GIFTWRAPPER_PLUGIN_FILE ), [], GIFTWRAPPER_VERSION );
+		wp_register_script( 'wcgwp-modal', plugins_url( '/assets/js/modal-vanilla/modal.min.js', GIFTWRAPPER_PLUGIN_FILE ), [], GIFTWRAPPER_VERSION, true );
 
 		// Modal and slide
-		wp_register_script( 'wcgwp-cart', plugins_url( '/assets/v6/js/wcgwp-cart.min.js', GIFTWRAPPER_PLUGIN_FILE ), [ 'jquery', 'wcgwp-modal', 'wc-cart', 'wc-add-to-cart' ], GIFTWRAPPER_VERSION );
-
+		wp_register_script( 'wcgwp-cart', plugins_url( '/assets/v6/js/wcgwp-cart.min.js', GIFTWRAPPER_PLUGIN_FILE ), [ 'jquery', 'wcgwp-modal', 'wc-cart', 'wc-add-to-cart' ], GIFTWRAPPER_VERSION, true );
 	}
 
 	/**
@@ -281,7 +280,7 @@ final class The_Gift_Wrapper {
 			// Modal, Slide & Checkbox
 			wp_register_script( 'wcgwp-cart', plugins_url( '/assets/v6/js/wcgwp-cart.min.js', GIFTWRAPPER_PLUGIN_FILE ), [ 'jquery', 'wc-cart', 'wc-add-to-cart', 'wcgwp-modal' ], GIFTWRAPPER_VERSION, true );
 
-			if ( is_cart() || is_checkout() ) { // Elementor widget cart/checkout does not trigger this
+			if ( is_cart() || is_checkout() || is_single() ) { // Elementor widget cart/checkout does not trigger this
 
 				if ( 'modal' === $display ) {
 					wp_enqueue_style( 'wcgwp-css' );
@@ -331,7 +330,7 @@ final class The_Gift_Wrapper {
 		wp_register_style( 'wcgiftwrap-css', plugins_url( '/assets/css/gift-wrapper-slide' . $suffix . '.css', GIFTWRAPPER_PLUGIN_FILE ), [], GIFTWRAPPER_VERSION );
 		wp_register_script( 'wcgwp-slide-cart-checkout', plugins_url( 'assets/js/gift-wrapper-slide' . $suffix . '.js', GIFTWRAPPER_PLUGIN_FILE ), [ 'jquery' ], GIFTWRAPPER_VERSION, true );
 
-		if ( is_cart() || is_checkout() ) {
+		if ( is_cart() || is_checkout() || is_single() ) {
 
 			if ( 'modal' === $display ) {
 				wp_enqueue_style( 'wcgiftwrap-modal-css' );

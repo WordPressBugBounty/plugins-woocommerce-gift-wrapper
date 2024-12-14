@@ -159,7 +159,7 @@ class The_Gift_Wrapper_Wrapping {
 
 		 // Leave if admin, not the right WC endpoint, or Gutenberg
 		if ( is_admin()
-			|| ( ! is_cart() && ! is_checkout() )
+			|| ( ! is_cart() && ! is_checkout() && ! is_single() )
 			|| defined( 'REST_REQUEST' ) && REST_REQUEST
 		) {
 			return;
@@ -368,7 +368,8 @@ class The_Gift_Wrapper_Wrapping {
 			$string .= 's';
 		}
 
-		$message = sprintf( __( 'You can only add %s %s to your cart.', 'woocommerce' ), $limit, $string );
+		$limit_message =  WC_Gift_Wrap()->strings->get_string( 'wrap_limit' );
+		$message = sprintf( $limit_message, $limit, $string );
 		$message = apply_filters( 'woocommerce_cart_limit_message', $message, $limit, $string );
 		wc_add_notice( $message, apply_filters( 'woocommerce_cart_item_removed_notice_type', 'error' ) );
 
@@ -382,7 +383,7 @@ class The_Gift_Wrapper_Wrapping {
 	 */
 	public function template_redirect() {
 
-		if ( ! is_checkout() && ! is_cart() ) {
+		if ( ! is_checkout() && ! is_cart() && ! is_single() ) {
 			return;
 		}
 
@@ -658,7 +659,7 @@ class The_Gift_Wrapper_Wrapping {
 	 */
 	public function gift_wrap_action( $label ) {
 
-		if ( WC()->cart->get_cart_contents_count() === 0
+		if ( is_object(WC()->cart) && WC()->cart->get_cart_contents_count() === 0
 			|| ( apply_filters( 'giftwrap_exclude_virtual_products', false ) && wcgwp_cart_contains_virtual_products_only() === true )
 		) {
 			return;
