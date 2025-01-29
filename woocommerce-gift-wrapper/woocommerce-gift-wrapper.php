@@ -4,7 +4,7 @@
  * Plugin Name: Gift Wrapper
  * Plugin URI: https://www.giftwrapper.app
  * Description: Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!
- * Version: 6.2.4
+ * Version: 6.2.5
  * WC requires at least: 5.6
  * WC tested up to: 9.3
  * Author: Gift Wrapper
@@ -33,7 +33,7 @@
 use GiftWrapper\WoocommerceGiftWrapper;
 defined( 'ABSPATH' ) || exit;
 if ( !defined( 'GIFTWRAPPER_VERSION' ) ) {
-    define( 'GIFTWRAPPER_VERSION', '6.2.4' );
+    define( 'GIFTWRAPPER_VERSION', '6.2.5' );
 }
 if ( !defined( 'GIFTWRAPPER_FILE' ) ) {
     define( 'GIFTWRAPPER_FILE', __FILE__ );

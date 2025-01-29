@@ -1,26 +1,39 @@
 {
-    "name": "wc/gift-wrapper",
-    "description": "Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!",
-    "type": "wordpress-plugin",
-    "license": "GPL v3 or later",
-    "authors": [
-        {
-            "name": "Woocommerce Gift Wrapper",
-            "email": "hello@giftwrapper.app",
-            "homepage": "https://www.giftwrapper.app/"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "GiftWrapper\\": "includes/",
-            "GiftWrapper\\Helpers\\": "includes/helpers/",
-            "GiftWrapper\\Blocks\\": "includes/blocks/",
-            "GiftWrapper\\Free\\": "free/includes/",
-            "GiftWrapper\\Pro\\": "pro/includes/"
-        }
-    },
-    "minimum-stability": "stable",
-    "require": {
-        "freemius/wordpress-sdk": "^2.9"
+  "name": "wc/gift-wrapper",
+  "description": "Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!",
+  "type": "wordpress-plugin",
+  "license": "GPL v3 or later",
+  "authors": [
+    {
+      "name": "Woocommerce Gift Wrapper",
+      "email": "hello@giftwrapper.app",
+      "homepage": "https://www.giftwrapper.app/"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GiftWrapper\\": "includes/",
+      "GiftWrapper\\Helpers\\": "includes/helpers/",
+      "GiftWrapper\\Blocks\\": "includes/blocks/",
+      "GiftWrapper\\Free\\": "free/includes/",
+      "GiftWrapper\\Pro\\": "pro/includes/"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "freemius/wordpress-sdk": "^2.9"
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "freemius/wordpress-sdk",
+        "version": "2.11.0",
+        "dist": {
+          "type": "zip",
+          "url": "wordpress-sdk-2.11.0.zip"
+        }
+      }
+    }
+  ]
 }

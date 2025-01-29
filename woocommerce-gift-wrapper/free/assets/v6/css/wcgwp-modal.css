@@ -209,3 +209,9 @@
 .theme-woodmart .modal-backdrop {
 	z-index: 150;
 }
+
+.wcgwp-thumb img {
+    height: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}

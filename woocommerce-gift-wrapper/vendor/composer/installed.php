@@ -3,7 +3,7 @@
         'name' => 'wc/gift-wrapper',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '01a872d4e1546a265457259ae9217f5b1d985bc1',
+        'reference' => '36b20d2574413c5274b50b18baaae17442ddb77a',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'freemius/wordpress-sdk' => array(
-            'pretty_version' => '2.10.0',
-            'version' => '2.10.0.0',
-            'reference' => 'd3c35b9bd430ba335600ef979b8f7f742504ed3a',
+            'pretty_version' => '2.11.0',
+            'version' => '2.11.0.0',
+            'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../freemius/wordpress-sdk',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'wc/gift-wrapper' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '01a872d4e1546a265457259ae9217f5b1d985bc1',
+            'reference' => '36b20d2574413c5274b50b18baaae17442ddb77a',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
