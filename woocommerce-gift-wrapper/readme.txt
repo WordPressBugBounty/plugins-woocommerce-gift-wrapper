@@ -1,10 +1,10 @@
 === Gift Wrapper for WooCommerce ===
 Plugin URI: https://giftwrapper.app/
-Contributors: cagdasdag, wpcenter
-Tags: woocommerce, wrap, gift, add-on, upsell
+Contributors: webfactory
+Tags: woocommerce, wrap, gift, gift wrapper, gift wrap
 Requires at least: 6.0
 Requires PHP: 7.4
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 6.2.5
 License: GPLv3 or later
 
@@ -12,7 +12,7 @@ Holidays and birthdays are always coming! Offer to gift wrap your customer's pur
 
 == Description ==
 
-The Gift Wrapper treats your wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PLUS version of The Gift Wrapper](https://www.giftwrapper.app "Gift Wrapper Plus plugin").
+The Gift Wrapper treats your gift wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PLUS version of The Gift Wrapper](https://www.giftwrapper.app "Gift Wrapper Plus plugin").
 
 = Some Features =
 
