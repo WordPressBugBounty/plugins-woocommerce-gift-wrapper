@@ -37,7 +37,6 @@ if ( ! function_exists( 'wcgwp_get_products' ) ) {
 		}
 
 		if ( ! $wrap_category_id ) {
-			error_log( 'Gift Wrapper doesn\'t seem to have a gift wrap WooCommerce product category set.' );
 			return [];
 		}
 
@@ -64,7 +63,6 @@ if ( ! function_exists( 'wcgwp_get_products' ) ) {
 
 	// Provision for if no gift wrap products returned, log an error
 	if ( empty( $products ) ) {
-		error_log( 'Gift Wrapper didn\'t come up with any wrap products in wcgwp_get_products() get_posts. Review the arguments and maybe use the \'wcgwp_get_posts_args\' filter hook to help get results. The arguments are: ' . print_r( $args, true ) );
 		return [];
 	}
 	return $products;

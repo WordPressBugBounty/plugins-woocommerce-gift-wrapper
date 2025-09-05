@@ -81,7 +81,7 @@ class WCGWP_Strings {
 		$strings['add_wrap_prompt'] = apply_filters( 'wcgwp_add_wrap_prompt', $strings['add_wrap_prompt'] );
 		$strings['add_wrap_to_order'] = apply_filters( 'wcgwp_add_wrap_button_text', $strings['add_wrap_to_order'] );
 
-		return wp_kses_post( apply_filters( 'wcgwp_filter_string', __( $strings[ $key ], 'woocommerce-gift-wrapper' ) ) );
+		return wp_kses_post( apply_filters( 'wcgwp_filter_string', $strings[$key] ) );
 
 	}
 

@@ -160,7 +160,7 @@ class Gift_Wrapper_Elementor_Widget extends Widget_Base {
 		$id = $this->get_id();
 
 		?>
-		<div id="wcgwp-elementor-<?php esc_attr_e( $id ); ?>" class="wc-giftwrap wcgwp-elementor">
+		<div id="wcgwp-elementor-<?php echo esc_attr( $id ); ?>" class="wc-giftwrap wcgwp-elementor">
 
 			<?php
 

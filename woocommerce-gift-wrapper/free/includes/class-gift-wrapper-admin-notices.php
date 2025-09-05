@@ -37,7 +37,10 @@ class The_Gift_Wrapper_Admin_Notices {
 		// Admin doesn't have a gift wrap category set! But maybe they've set hook placements!
 		if ( ! $wrap_cat_id || ( 'none' === $wrap_cat_id && ! in_array( 'none', $hooks ) ) ) { ?>
             <div id="message" class="notice notice-error is-dismissible">
-                <p><?php echo wp_kses_post( sprintf( __( 'Gift Wrapper is not set up properly yet. Please choose the WooCommerce product category that contains your gift wrap products in the <a href="%s">Gift Wrapper settings</a>.', 'woocommerce-gift-wrapper' ), admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper' ) ) ); ?></p>
+                <p><?php 
+                /* translators: %s is replaced with Gift Wrapper settings page URL */
+                echo wp_kses_post( sprintf( __( 'Gift Wrapper is not set up properly yet. Please choose the WooCommerce product category that contains your gift wrap products in the <a href="%s">Gift Wrapper settings</a>.', 'woocommerce-gift-wrapper' ), admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper' ) ) ); 
+                ?></p>
             </div>
 		<?php }
 
@@ -125,7 +128,7 @@ function gift_wrapper_outdated_template_notice( $outdated_files ) {
 			<?php esc_html_e( 'The following files should be updated to reflect parent template file changes to ensure they are secure and compatible with the current version of Gift Wrapper.', 'woocommerce-gift-wrapper' ); ?>  
 			<ol>
 			<?php foreach ( $outdated_files as $file ) { ?>
-				<li><?php esc_html_e( $file ); ?></li>
+				<li><?php echo esc_html( $file ); ?></li>
 			<?php } ?>
 			</ol>
 			<?php esc_html_e( 'If you copied over a template file to your theme to change something, you will need to copy the new version of the template and apply your changes again.', 'woocommerce-gift-wrapper' ); ?>

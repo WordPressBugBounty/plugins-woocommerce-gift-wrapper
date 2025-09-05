@@ -23,7 +23,7 @@ class WCGWP_Unwrap {
 		// Check if it is a multisite uninstall - if so, run the uninstall function for each blog id
 		if ( is_multisite() ) {
 			global $wpdb;
-			foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {
+			foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {  //phpcs:ignore
 				switch_to_blog( $blog_id );
 				$this->uninstall();
 			}

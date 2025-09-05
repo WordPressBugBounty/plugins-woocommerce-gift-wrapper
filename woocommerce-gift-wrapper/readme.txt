@@ -5,10 +5,10 @@ Tags: woocommerce, wrap, gift, gift wrapper, gift wrap
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 6.2.5
+Stable tag: 6.3
 License: GPLv3 or later
 
-Holidays and birthdays are always coming! Offer to gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
+Holidays and birthdays are always coming! Gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
 
 == Description ==
 
@@ -51,9 +51,6 @@ Maybe you can **leave a positive review**?
 
 [Purchase Gift Wrapper Plus](https://www.giftwrapper.app "Gift Wrapper Plus plugin")
 
-= Translations =
-
-Take a moment and [help Translate the Gift Wrapper into your language](https://translate.wordpress.org/projects/wp-plugins/gift-wrapper/)
 
 == Installation ==
 
@@ -218,12 +215,6 @@ add_filter( 'wcgwp_filter_string', 'wcgwp_filter_strings', 11, 1 );`
 
 Now the text will say "Would you like to wrap this?" This PHP code could be added using the [Code Snippets](https://wordpress.org/plugins/code-snippets/) plugin if you do not have a child theme and are not comfortable editing your child theme functions.php file.
 
-**Translation**
-This plugin comes ready with a .POT file. If you aren't already familiar with [localisation (translation) of Wordpress plugins and themes, you can learn more here](https://premium.wpmudev.org/blog/how-to-translate-a-wordpress-plugin/). You can add .PO files to the /lang folder of this plugin to change it to your language, or even to just adjust the English currently used.
-
-To change what this plugin says on screen, create PO/MO file(s) in your language. If your site is in English (US), then you would be creating a PO file called *gift-wrapper-en_US.po* and putting it in the /lang/ folder inside the Gift Wrapper plugin folder (/wp-content/plugins/gift-wrapper/lang/). If your site is in French (France), your PO file would be /wp-content/plugins/gift-wrapper/lang/woocommerce-gift-wrapper-fr_FR.po. Note in this case, you would be editing or overwriting the existing po file for French.
-
-I recommend [Poedit](https://poedit.net/) to get string translations done quickly and simply. Note: translation occurs after filters (mentioned above) are run.
 
 **Templating**
 If you want to do more about styling gift wrap presentation, this plugin includes a [templating system](https://www.giftwrapper.app/documentation/#templates).
@@ -257,6 +248,10 @@ Please [write for support](https://wordpress.org/support/plugin/woocommerce-gift
 * New v6 templates allow for AJAX add gift wrap to cart, more seamless transition to Gift Wrapper Plus. If you are using Gift Wrapper template overrides in your theme, you will want to make backups and update to 6.0 with caution, testing the cart with your theme overrides.
 
 == Changelog ==
+
+= 6.3 - 05.09.2025 =
+* WebFactory took over development
+* Code fixes and clean-up
 
 = 6.2.5 - 30.01.2025 =
 * Fix: Product attributes from single product page

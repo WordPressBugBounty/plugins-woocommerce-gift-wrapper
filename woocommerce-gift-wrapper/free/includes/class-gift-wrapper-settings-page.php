@@ -46,12 +46,15 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		$settings[] = [
 			'name'          => __( 'Setup Instructions', 'woocommerce-gift-wrapper' ),
 			'type'          => 'title',
-			'desc'          => '<strong>1.</strong> '
+			'desc'          => ' <p style="color:#135e96;font-size:20px"><strong>For more advanced options get the PRO version. &nbsp; <a href="https://www.giftwrapper.app" class="button button-primary" rel="noopener" target="_blank">Upgrade to PRO for only $49!</a></strong></p><strong>1.</strong> '
+                                /* translators: %s is the URL of the Product Categories page */
 								. sprintf( __( 'Create a new, unique <a href="%s" target="_blank" rel="noopener">WooCommerce product category</a> to hold your gift wrap product(s). Name it anything you\'d like.', 'woocommerce-gift-wrapper' ), admin_url( '/edit-tags.php?taxonomy=product_cat&post_type=product' ) )
+                                /* translators: %s is the URL of the New Product page */
 								. '<br /><strong>2.</strong> ' . wp_kses_post( sprintf( __( 'Create at least one <a href="%s" target="_blank">WooCommerce product</a> to represent your gift wrap or add-on.', 'woocommerce-gift-wrapper' ), admin_url( 'post-new.php?post_type=product' ) ) )
                                 . '<br /> &nbsp; &nbsp; &nbsp; &nbsp; ' . __( 'Give the product a title and a price. It must have a price set, even if at 0. It can be hidden from the catalog if you like, but shouldn\'t be private.', 'woocommerce-gift-wrapper' )
 								. '<br /><strong>3.</strong> ' . __( 'Add the product(s) from step 2 to your new, unique WooCommerce product category from step 1.', 'woocommerce-gift-wrapper' )
 								. '<br /><strong>4.</strong> ' . sprintf( __( 'Change the "<a href="#" id="wcgwp-wrap-category-link">Gift wrap category</a>" setting below to the product category created in step 1, and save.', 'woocommerce-gift-wrapper' )
+                                /* translators: %s is the URL of the Gift Wrapper settings page */
 								. '<br /><strong>5.</strong> ' . __( 'Review all the settings below, then finish on the <a href="%s" rel="noopener">Order Wrapping</a> options page.', 'woocommerce-gift-wrapper' ), admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper&section=order_wrapping' ) ),
 		];
 		$settings[]	= [
@@ -90,7 +93,7 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 			'name'              => __( 'Accommodate templates from version 5?', 'woocommerce-gift-wrapper' ),
 			'type'              => 'checkbox',
 			'default'           => 'no',
-			'desc'              => __( 'Version 6.0 of Gift Wrapper includes many template adjustments, and uses AJAX in the cart/checkout instead of a form submit.<br />If you have overwritten the plugin templates with customizations before 6.0 and things broke for you with the 6.0 update, check this box until you can update your templates.', 'woocommerce-gift-wrapper-plus' ),
+			'desc'              => __( 'Version 6.0 of Gift Wrapper includes many template adjustments, and uses AJAX in the cart/checkout instead of a form submit.<br />If you have overwritten the plugin templates with customizations before 6.0 and things broke for you with the 6.0 update, check this box until you can update your templates.', 'woocommerce-gift-wrapper' ),
 			'autoload'          => false
 		];
 
@@ -122,8 +125,9 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		$settings[] = [
 			'name' => __( 'Order Gift Wrapping Settings', 'woocommerce-gift-wrapper' ),
 			'type' => 'title',
-			'desc' => __( 'These settings apply to per-order wrap options in the cart and checkout areas, not cart item (per-item) or per-product wrapping.', 'woocommerce-gift-wrapper' )
+			'desc' => __( ' <p style="color:#135e96;font-size:20px"><strong>Get per-product settings. &nbsp; <a href="https://www.giftwrapper.app" class="button button-primary" rel="noopener" target="_blank">Upgrade to PRO for only $49!</a></strong></p> These settings apply to per-order wrap options in the cart and checkout areas, not cart item (per-item) or per-product wrapping.', 'woocommerce-gift-wrapper' )
 						. '<br />'
+                        /* translators: %s is the URL of the Gift Wrapper plugin website */
 						. wp_kses_post( sprintf( __( 'Per-product and cart item (inside the cart) gift wrapping options are available in the <a href="%s" target="_blank" rel="noopener">PLUS version of this plugin.</a>', 'woocommerce-gift-wrapper' ), 'https://giftwrapper.app' ) ),
 		];
 		$settings[] = [
@@ -151,8 +155,8 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		];
 		$settings[] = [
 			'id'        => 'wcgwp_checkbox_link',
-			'name'      => __( 'Link checkbox label?', 'woocommerce-gift-wrapper-plus' ),
-			'desc_tip'  => __( 'Should the checkbox label product title link to its WC product page?', 'woocommerce-gift-wrapper-plus' ),
+			'name'      => __( 'Link checkbox label?', 'woocommerce-gift-wrapper' ),
+			'desc_tip'  => __( 'Should the checkbox label product title link to its WC product page?', 'woocommerce-gift-wrapper' ),
 			'type'      => 'select',
 			'default'   => 'no',
 			'options'   => [
@@ -212,14 +216,15 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 	 */
 	public function output_more_info_screen() { ?>
 
-		<div class="wcgwp-donation" style="margin:3em">
-			<h2 style="font-size:3em">Need more features?</h2>
-			<p style="font-size: 2em;">
+		<div class="wcgwp-donation">
+      <p style="color:#135e96;font-size:20px"><strong>Get priority email support from the plugin's developers. &nbsp; <a href="https://www.giftwrapper.app" class="button button-primary" rel="noopener" target="_blank">Upgrade to PRO for only $49!</a></strong></p>
+			<h2>Need more features?</h2>
+			<p>
 				If you need more features and functionality such as per-product wrap options, check out the PLUS version of The Gift Wrapper plugin. <a href="https://www.giftwrapper.app" target="_blank" rel="noopener">Upgrade now!</a>
 			</p>
-			<h2 style="font-size:3em">Need help?</h2>
-			<p style="font-size: 2em;">
-				Please refer to the <a href="https://wordpress.org/plugins/woocommerce-gift-wrapper/#faq-header" target=_blank" rel="noopener">FAQ</a> and <a href="https://wordpress.org/support/plugin/woocommerce-gift-wrapper/" target="_blank" rel="noopener nofollow">support forum</a> where your question might already be answered. <a href="https://wordpress.org/support/topic/before-you-post-please-read/" rel="https://wordpress.org/support/topic/before-you-post-please-read/">Read this before posting</a>. I only provide email support for paying customers (thank you ✌️).
+			<h2>Need help?</h2>
+			<p>
+				Support via email is reserved for PRO (paying) users only - <a href="https://www.giftwrapper.app/" target="_blank">get PRO now</a>. Please refer to the <a href="https://wordpress.org/plugins/woocommerce-gift-wrapper/#faq-header" target=_blank" rel="noopener">FAQ</a> and <a href="https://wordpress.org/support/plugin/woocommerce-gift-wrapper/" target="_blank" rel="noopener nofollow">support forum</a> where your question might already be answered. <a href="https://wordpress.org/support/topic/before-you-post-please-read/" rel="https://wordpress.org/support/topic/before-you-post-please-read/">Read this before posting</a>.
             </p>
 		</div>
 
@@ -237,7 +242,8 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 			'name'              => '',
 			'type'              => 'title',
 			'id'                => 'wcgwp-plus-only-lang',
-			'desc'              => '<p style="color:#135e96;font-size:20px"><strong>' . sprintf( wp_kses( __( 'Easy translation to your language is available in the PLUS version of Gift Wrapper. &nbsp; <a href="%s" class="button button-primary" rel="noopener" target="_blank">Upgrade now!</a>', 'woocommerce-gift-wrapper' ), [ 'a' => [ 'href' => [], 'target' => [], 'rel' => [], 'class' => [ 'btn','button' ] ] ] ), 'https://www.giftwrapper.app' ) . '</strong></p>',
+            /* translators: %s is the URL of the Gift Wrapper plugin website */
+			'desc'              => '<p style="color:#135e96;font-size:20px"><strong>' . sprintf( wp_kses( __( 'Easy translation to your language is available in the PLUS version of Gift Wrapper. &nbsp; <a href="%s" class="button button-primary" rel="noopener" target="_blank">Upgrade now for only $49!</a>', 'woocommerce-gift-wrapper' ), [ 'a' => [ 'href' => [], 'target' => [], 'rel' => [], 'class' => [ 'btn','button' ] ] ] ), 'https://www.giftwrapper.app' ) . '</strong></p>',
 		];
 		$settings[] = [
 			'type' => 'sectionend'
@@ -246,8 +252,8 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		$settings[] = [
 			'name'              => __( 'Language Matters', 'woocommerce-gift-wrapper' ),
 			'type'              => 'title',
-			'desc'              => __( 'Enter your adjustments or translations in the fields at right. Defaults are shown at left.' )
-				. __( ' To make text disappear on the front end, you may need to use CSS (e.g. {style="display:none"} ), to hide enclosing elements. To use HTML, you will need to override included plugin template files.' ),
+			'desc'              => __( 'Enter your adjustments or translations in the fields at right. Defaults are shown at left.', 'woocommerce-gift-wrapper' )
+				. __( ' To make text disappear on the front end, you may need to use CSS (e.g. {style="display:none"} ), to hide enclosing elements. To use HTML, you will need to override included plugin template files.', 'woocommerce-gift-wrapper' ),
 		];
 		$settings[] = [
 			'id'                => 'wcgwp_strings[wrap]',
@@ -298,6 +304,7 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		];
 		$settings[] = [
 			'id'                => 'wcgwp_strings[add_wrap_for_x]',
+            /* translators: %s is replaced with product name */
 			'name'              => __( 'Add gift wrapping for %s?', 'woocommerce-gift-wrapper' ),
 			'type'              => 'text',
 			'default'           => 'Add gift wrapping for %s?',
@@ -306,7 +313,8 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		];
 		$settings[] = [
 			'id'                => 'wcgwp_strings[add_x_for_x]',
-			'name'              => __( 'Add %s for %s?', 'woocommerce-gift-wrapper-plus' ),
+            /* translators: %1$s is the Wrapper name, %2$s is the product name */
+			'name'              => __( 'Add %1$s for %2$s?', 'woocommerce-gift-wrapper' ),
 			'type'              => 'text',
 			'default'           => 'Add %s for %s?',
 			'class'             => 'wcgwp-plus',
@@ -314,7 +322,8 @@ class Gift_Wrapper_Settings_Page extends WC_Settings_Page {
 		];
 		$settings[] = [
 			'id'                => 'wcgwp_strings[wrap_limit]',
-			'name'              => __( 'You can only add %s %s to your cart.', 'woocommerce-gift-wrapper-plus' ),
+            /* translators: %1$s is the quantity (literal like one, two), %2$s is the wrapper name */
+			'name'              => __( 'You can only add %1$s %2$s to your cart.', 'woocommerce-gift-wrapper' ),
 			'type'              => 'text',
 			'default'           => 'You can only add %s %s to your cart.',
 			'class'             => 'wcgwp-plus',

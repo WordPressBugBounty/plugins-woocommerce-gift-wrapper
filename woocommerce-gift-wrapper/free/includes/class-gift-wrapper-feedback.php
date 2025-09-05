@@ -69,14 +69,14 @@ class The_Gift_Wrapper_Feedback {
 				<div>
 					<?php foreach ( $deactivate_reasons as $reason_key => $reason ) : ?>
 						<span class="wcgwp-feedback-dialog-input-wrapper">
-							<input id="wcgwp-feedback-<?php esc_attr_e( $reason_key ); ?>" type="radio" name="reason_key" value="<?php esc_attr_e( $reason_key ); ?>">
-							<label for="wcgwp-feedback-<?php esc_attr_e( $reason_key ); ?>"><?php esc_html_e( $reason['title'] ); ?></label>
+							<input id="wcgwp-feedback-<?php echo esc_attr( $reason_key ); ?>" type="radio" name="reason_key" value="<?php echo esc_attr( $reason_key ); ?>">
+							<label for="wcgwp-feedback-<?php echo esc_attr( $reason_key ); ?>"><?php echo esc_html( $reason['title'] ); ?></label>
 							<?php if ( ! empty( $reason['input_placeholder'] ) ) : ?>
-								<input class="wcgwp-feedback-text wcgwp-feedback-<?php esc_attr_e( $reason_key ); ?> hidden" type="text" name="reason_<?php esc_attr_e( $reason_key ); ?>" placeholder="<?php esc_attr_e( $reason['input_placeholder'] ); ?>">
+								<input class="wcgwp-feedback-text wcgwp-feedback-<?php echo esc_attr( $reason_key ); ?> hidden" type="text" name="reason_<?php echo esc_attr( $reason_key ); ?>" placeholder="<?php echo esc_attr( $reason['input_placeholder'] ); ?>">
 							<?php endif; ?>
 							<?php if ( ! empty( $reason['alert'] ) ) { ?>
-								<p class="wcgwp-feedback-text wcgwp-feedback-<?php esc_attr_e( $reason_key ); ?> hidden">
-									<strong><?php esc_html_e( $reason['alert'] ); ?></strong>
+								<p class="wcgwp-feedback-text wcgwp-feedback-<?php echo esc_attr( $reason_key ); ?> hidden">
+									<strong><?php echo esc_html( $reason['alert'] ); ?></strong>
 								</p>
 							<?php } ?>
 						</span>
@@ -105,7 +105,7 @@ class The_Gift_Wrapper_Feedback {
 	 */
 	public function ajax_gift_wrapper_deactivate_feedback() {
 
-		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'gift_wrapper_deactivate_feedback_nonce' ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wpnonce'] ?? '')), 'gift_wrapper_deactivate_feedback_nonce' ) ) {
 			wp_send_json_error();
 		}
 
@@ -113,8 +113,8 @@ class The_Gift_Wrapper_Feedback {
 			wp_send_json_error( 'Permission denied' );
 		}
 
-		$reason_key = sanitize_text_field( $_POST['reason_key'] ) ?? '';
-		$reason_text = sanitize_text_field( $_POST["reason_{$reason_key}"] ) ?? '';
+		$reason_key = sanitize_text_field(wp_unslash($_POST['reason_key'] ?? '' ));
+		$reason_text = sanitize_text_field(wp_unslash($_POST["reason_{$reason_key}"] ?? ''));
 
 		if ( empty( $reason_key ) && empty( $reason_text ) ) {
 			wp_send_json_success();
