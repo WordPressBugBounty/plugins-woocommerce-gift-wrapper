@@ -5,7 +5,7 @@ Tags: woocommerce, wrap, gift, gift wrapper, gift wrap
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 6.3
+Stable tag: 6.31
 License: GPLv3 or later
 
 Holidays and birthdays are always coming! Gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
@@ -248,6 +248,8 @@ Please [write for support](https://wordpress.org/support/plugin/woocommerce-gift
 * New v6 templates allow for AJAX add gift wrap to cart, more seamless transition to Gift Wrapper Plus. If you are using Gift Wrapper template overrides in your theme, you will want to make backups and update to 6.0 with caution, testing the cart with your theme overrides.
 
 == Changelog ==
+= 6.31 - 11.09.2025 =
+* Translation string bug fix
 
 = 6.3 - 05.09.2025 =
 * WebFactory took over development

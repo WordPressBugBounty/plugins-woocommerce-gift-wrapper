@@ -54,10 +54,10 @@ $has_textarea = (int) get_option( 'wcgwp_textarea_limit' ) > 0;
 				$prompt = sprintf( $prompt, $product_title );
 			} else {
 				if ( $product_count < 2 && apply_filters( 'wcgwp_v5_checkbox_prompt', true ) ) {
-					$prompt = The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_for_x' ));
+					$prompt = WCGWP()->strings->get_string( 'add_wrap_for_x' );
 					$prompt = sprintf( $prompt, $price_html );
 				} else {
-					$prompt = The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_x_for_x' ));
+					$prompt = WCGWP()->strings->get_string( 'add_x_for_x' );
 					if ( 'yes' === $show_link ) {
 						$product_title = '<a href="' . $product_url . '" rel="noopener">' . $product_title . '</a>';
 					}
