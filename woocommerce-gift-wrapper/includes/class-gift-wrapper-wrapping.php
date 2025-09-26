@@ -159,7 +159,7 @@ class The_Gift_Wrapper_Wrapping {
 
 		 // Leave if admin, not the right WC endpoint, or Gutenberg
 		if ( is_admin()
-			|| ( ! is_cart() && ! is_checkout() )
+			|| ( ! is_cart() && ! is_checkout() && ! is_single() )
 			|| defined( 'REST_REQUEST' ) && REST_REQUEST
 		) {
 			return;
@@ -217,7 +217,9 @@ class The_Gift_Wrapper_Wrapping {
 		if ( is_numeric( $product ) ) {
 			$product = wc_get_product( $product );
 		}
-		$message = sprintf( __( 'You cannot add another "%s" to your cart.', 'woocommerce' ), $product->get_name() );
+
+        /* translators: %s is replaced with gift wrap name */
+		$message = sprintf( __( 'You cannot add another "%s" to your cart.', 'woocommerce-gift-wrapper' ), $product->get_name() );
 		$message = apply_filters( 'woocommerce_cart_product_cannot_add_another_message', $message, $product );
 		wc_add_notice( $message, apply_filters( 'wcgwp_duplicate_product_notice_type', 'error' ) );
 
@@ -241,7 +243,7 @@ class The_Gift_Wrapper_Wrapping {
 			wp_send_json_error( [ 'message' => 'Invalid nonce' ] );
 		}
 
-		$product_id = $_POST['product_id'];
+		$product_id = sanitize_key(wp_unslash($_POST['product_id'] ?? ''));
 
 		if ( empty( $product_id ) ) {
 			wp_send_json_error( [ 'message' => __( 'No valid WC product ID found', 'woocommerce-gift-wrapper' ) ] );
@@ -299,7 +301,7 @@ class The_Gift_Wrapper_Wrapping {
 		// Add WCGWP note cart item data if relevant
 		$note = null;
 		if ( ! empty( $_POST['note'] ) ) {
-			$note = sanitize_text_field( stripslashes( $_POST['note'] ) );
+			$note = sanitize_text_field(wp_unslash($_POST['note']));
 		}
 		// Initialize some WCGWP cart item data
 		$cart_item_data = [
@@ -316,7 +318,6 @@ class The_Gift_Wrapper_Wrapping {
 			}
 			do_action( 'wcgwp_after_add_to_cart', $cart_contents, $product_id, $note );
 		} catch ( Exception $e ) {
-			error_log( 'Gift Wrapper failed adding wrap to order. More info: ' . $e->getMessage() );
 			wp_send_json_error( [ 'message' => 'Adding wrap failed. More info: ' . $e->getMessage() ] );
 		}
 
@@ -340,7 +341,7 @@ class The_Gift_Wrapper_Wrapping {
 		if ( empty( $_POST['cart_item_key'] ) ) {
 			wp_send_json_error( [ 'message' => 'Missing cart item key' ] );
 		}
-		$cart_item_key = $_POST['cart_item_key'];
+		$cart_item_key = sanitize_key(wp_unslash($_POST['cart_item_key'] ?? ''));
 
 		$cart = WC()->cart->get_cart();
 		if ( ! isset( $cart[ $cart_item_key ] ) ) {
@@ -368,7 +369,8 @@ class The_Gift_Wrapper_Wrapping {
 			$string .= 's';
 		}
 
-		$message = sprintf( __( 'You can only add %s %s to your cart.', 'woocommerce' ), $limit, $string );
+		$limit_message =  WC_Gift_Wrap()->strings->get_string( 'wrap_limit' );
+		$message = sprintf( $limit_message, $limit, $string );
 		$message = apply_filters( 'woocommerce_cart_limit_message', $message, $limit, $string );
 		wc_add_notice( $message, apply_filters( 'woocommerce_cart_item_removed_notice_type', 'error' ) );
 
@@ -382,7 +384,7 @@ class The_Gift_Wrapper_Wrapping {
 	 */
 	public function template_redirect() {
 
-		if ( ! is_checkout() && ! is_cart() ) {
+		if ( ! is_checkout() && ! is_cart() && ! is_single() ) {
 			return;
 		}
 
@@ -400,38 +402,21 @@ class The_Gift_Wrapper_Wrapping {
 
 
 	/**
-	 * Check Gift Wrapper form nonce before continuing
-	 *
-	 * @deprecated 6.0.0
-	 * @return void
-	 */
-	private function check_nonce() {
-
-		// Check nonce
-		if ( isset( $_POST['wcgwp_order_wrap_nonce'] ) && wp_verify_nonce( $_POST['wcgwp_order_wrap_nonce'], 'wcgwp_order_wrap' ) ) {
-			return;
-		}
-		error_log( 'Your Gift Wrapper plugin cart/checkout template override is missing a nonce. Please update your template(s).' );
-		wp_die( 'Bad nonce' );
-
-	}
-
-	/**
 	 * Redirect to cart or checkout page as appropriate
 	 *
 	 * @deprecated 6.0.0
 	 * @return void
 	 */
 	private function redirect() {
-
+        //phpcs:ignore nonce as can be reached without one
 		// POST/REDIRECT/GET to prevent wrap from showing back up after delete + refresh
-		if ( isset( $_POST['wcgwp_submit_before_cart'] ) || isset( $_POST['wcgwp_submit_coupon'] ) || isset( $_POST['wcgwp_submit_after_cart'] ) ) {
+		if ( isset( $_POST['wcgwp_submit_before_cart'] ) || isset( $_POST['wcgwp_submit_coupon'] ) || isset( $_POST['wcgwp_submit_after_cart'] ) ) { //phpcs:ignore
 			$this->wrapped = true;
 			wp_safe_redirect( wc_get_cart_url(), 303 );
 			exit; // not die() because inside hook
 		}
 
-		if ( isset( $_POST['wcgwp_submit_checkout'] ) || isset( $_POST['wcgwp_submit_after_checkout'] ) ) {
+		if ( isset( $_POST['wcgwp_submit_checkout'] ) || isset( $_POST['wcgwp_submit_after_checkout'] ) ) { //phpcs:ignore
 			$this->wrapped = true;
 			wp_safe_redirect( wc_get_checkout_url(), 303 );
 			exit;
@@ -495,65 +480,64 @@ class The_Gift_Wrapper_Wrapping {
 	 * @throws Exception
 	 */
 	 public function add_giftwrap_to_order() {
-
+         //phpcs:ignore sanitized with wc_sanitize_textarea
 		 $cart_item_data = [ 'wcgwp_source' => 'peri-cart' ];
+         
+         if ( wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['wcgwp_order_wrap_nonce'] ?? '')), 'wcgwp_order_wrap' ) ) {
+			return;
+		}
 
 		 if ( isset( $_POST['wcgwp_submit_before_cart'] ) ) {
-			$this->check_nonce();
 			$product_id = isset( $_POST['wcgwp_product_before_cart'] ) ? (int) $_POST['wcgwp_product_before_cart'] : false;
 			if ( ! $product_id ) {
 				return;
 			}
 			if ( isset( $_POST['wcgwp_note_before_cart'] ) && '' !== $_POST['wcgwp_note_before_cart'] ) {
-				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( stripslashes( $_POST['wcgwp_note_before_cart'] ) );
+				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( wp_unslash( $_POST['wcgwp_note_before_cart'] ?? '' ) ); //phpcs:ignore
 			}
 			$this->add_giftwrap( $product_id, $cart_item_data );
 		}
 
 		if ( isset( $_POST['wcgwp_submit_coupon'] ) ) {
-			$this->check_nonce();
 			$product_id = isset( $_POST['wcgwp_product_coupon'] ) ? (int) $_POST['wcgwp_product_coupon'] : false;
 			if ( ! $product_id ) {
 				return;
 			}
 			if ( isset( $_POST['wcgwp_note_coupon'] ) && '' !== $_POST['wcgwp_note_coupon'] ) {
-				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( stripslashes( $_POST['wcgwp_note_coupon'] ) );
+				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( wp_unslash( $_POST['wcgwp_note_coupon'] ?? '' ) ); //phpcs:ignore
 			}
 			$this->add_giftwrap( $product_id, $cart_item_data );
 		}
 
 		if ( isset( $_POST['wcgwp_submit_after_cart'] ) ) {
-			$this->check_nonce();
 			$product_id = isset( $_POST['wcgwp_product_after_cart'] ) ? (int) $_POST['wcgwp_product_after_cart'] : false;
 			if ( ! $product_id ) {
 				return;
 			}
 			if ( isset( $_POST['wcgwp_note_after_cart'] ) && '' !== $_POST['wcgwp_note_after_cart'] ) {
-				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( stripslashes( $_POST['wcgwp_note_after_cart'] ) );
+				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( wp_unslash( $_POST['wcgwp_note_after_cart'] ?? '' ) ); //phpcs:ignore
 			}
 			$this->add_giftwrap( $product_id, $cart_item_data );
 		}
 
 		if ( isset( $_POST['wcgwp_submit_checkout'] ) ) {
-			$this->check_nonce();
-			$product_id = isset( $_POST['wcgwp_product_checkout'] ) ? (int) wc_clean( $_POST['wcgwp_product_checkout'] ) : false;
+			$product_id = isset( $_POST['wcgwp_product_checkout'] ) ? (int) wc_clean( $_POST['wcgwp_product_checkout'] ) : false; //phpcs:ignore
 			if ( ! $product_id ) {
 				return;
 			}
 			if ( isset( $_POST['wcgwp_note_checkout'] ) && '' !== $_POST['wcgwp_note_checkout'] ) {
-				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( stripslashes( $_POST['wcgwp_note_checkout'] ) );
+				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( wp_unslash( $_POST['wcgwp_note_checkout'] ?? '' ) ); //phpcs:ignore
 			}
 			$this->add_giftwrap( $product_id, $cart_item_data );
 		}
 
 		if ( isset( $_POST['wcgwp_submit_after_checkout'] ) ) {
-			$this->check_nonce();
 			$product_id = isset( $_POST['wcgwp_product_after_checkout'] ) ? (int) $_POST['wcgwp_product_after_checkout'] : false;
 			if ( ! $product_id ) {
 				return;
 			}
 			if ( isset( $_POST['wcgwp_note_after_checkout'] ) && '' !== $_POST['wcgwp_note_after_checkout'] ) {
-				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( stripslashes( $_POST['wcgwp_note_after_checkout'] ) );
+				$cart_item_data['wcgwp_note'] = wc_sanitize_textarea( wp_unslash( $_POST['wcgwp_note_after_checkout'] ?? '' ) ); //phpcs:ignore
 			}
 			$this->add_giftwrap( $product_id, $cart_item_data );
 		}
@@ -658,7 +642,7 @@ class The_Gift_Wrapper_Wrapping {
 	 */
 	public function gift_wrap_action( $label ) {
 
-		if ( WC()->cart->get_cart_contents_count() === 0
+		if ( is_object(WC()->cart) && WC()->cart->get_cart_contents_count() === 0
 			|| ( apply_filters( 'giftwrap_exclude_virtual_products', false ) && wcgwp_cart_contains_virtual_products_only() === true )
 		) {
 			return;
@@ -677,7 +661,7 @@ class The_Gift_Wrapper_Wrapping {
 		$giftwrap_details = wc_sanitize_textarea( get_option( 'wcgwp_details' ) );
 		?>
 
-		<div class="wc-giftwrap giftwrap<?php esc_attr_e( $label ); ?> <?php esc_attr_e( $this->extra_class() ); ?>">
+		<div class="wc-giftwrap giftwrap<?php echo esc_attr( $label ); ?> <?php echo esc_attr( $this->extra_class() ); ?>">
 
 			<?php
 			$v6 = 'no' === get_option( 'wcgwp_lt6_templates', 'no' ) ? 'v6/' : '';

@@ -35,11 +35,6 @@
 			if ( ! is_object( $post ) ) {
 				return $tabs;
 			}
-
-			// Exit if we are on Gift Wrap product page
-			if ( wcgwp_is_wrap( $post->ID ) ) {
-				return $tabs;
-			}
 			?>
 
 			<style>#woocommerce-product-data ul.wc-tabs li.gift-wrapper-tab a::before{content:"\f328"}</style>
@@ -60,29 +55,15 @@
 		 * @return void
 		 */
 		public function product_data_panel() {
-
-			global $post;
-
-			// Exit if we are on Gift Wrap product page
-			if ( wcgwp_is_wrap( $post->ID ) ) {
-				return;
-			}
 			?>
-
 				<div id="gift-wrapper-product-options" class="panel woocommerce_options_panel hidden">
-					<div class="options_group">
-						<div id="wcgwp-plus-only-product">
-							<p>
-								<strong>Per-product gift wrap settings are a feature of Gift Wrapper Plus.</strong>
-								<br>&nbsp;<br>
-								<a href="https://www.giftwrapper.app" rel="noopener" target="_blank" class="button btn">Upgrade to Gift Wrapper Plus</a>
-							</p>
-						</div>
+					<div class="options_group" style="padding:2em">
+							<strong>Per-product gift wrap settings are a feature of <a href="<?php echo admin_url('admin.php?page=wc-settings&tab=gift-wrapper'); ?>#open-pro-dialog">Gift Wrapper PRO</a>.</strong>
+                            <br /><br />
+							<a href="<?php echo admin_url('admin.php?page=wc-settings&tab=gift-wrapper'); ?>" rel="noopener" class="button">Open WooCommerce Global Gift Wrap Settings</a>
 					</div>
 				</div>
-
 			<?php
-
 		}
 
 	}

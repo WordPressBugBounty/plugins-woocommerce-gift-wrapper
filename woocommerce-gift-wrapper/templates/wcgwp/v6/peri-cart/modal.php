@@ -20,25 +20,25 @@ defined( 'ABSPATH' ) || exit;
 $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 ?>
 
-<div class="wcgwp-wrapper wcgwp-peri-cart wcgwp-wrapper-<?php esc_attr_e( $label ); ?>">
+<div class="wcgwp-wrapper wcgwp-peri-cart wcgwp-wrapper-<?php echo esc_attr( $label ); ?>">
 	<p class="wcgwp-prompt-wrapper">
-		<button type="button" data-label="<?php esc_attr_e( $label ); ?>" class="wcgwp-modal-toggle button btn alt <?php esc_attr_e( $button_class ); ?>">
-			<?php echo WCGWP()->strings->get_string( 'add_wrap_prompt' ); ?>
+		<button type="button" data-label="<?php echo esc_attr( $label ); ?>" class="wcgwp-modal-toggle button btn alt <?php echo esc_attr( $button_class ); ?>">
+			<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_prompt' )); ?>
 		</button>
 	</p>
 
-	<div id="wcgwp-panel-<?php esc_attr_e( $label ); ?>" class="wcgwp-modal modal fusion-modal" tabindex="-1" role="dialog">
-		<div class="modal-dialog <?php echo apply_filters( 'wcgwp_modal_size', 'modal-lg'); ?> modal-dialog-centered" role="document">
+	<div id="wcgwp-panel-<?php echo esc_attr( $label ); ?>" class="wcgwp-modal modal fusion-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog <?php echo esc_html(apply_filters( 'wcgwp_modal_size', 'modal-lg')); ?> modal-dialog-centered" role="document">
 			<div class="modal-content fusion-modal-content">
 				<div class="modal-header">
-					<button type="button" id="wcgwp-cancel-<?php esc_attr_e( $label ); ?>" class="wcgwp-cancel button btn <?php esc_attr_e( $button_class ); ?>" data-dismiss="modal" aria-label="Close">
-						<?php echo WCGWP()->strings->get_string( 'cancel' ); ?>
+					<button type="button" id="wcgwp-cancel-<?php echo esc_attr( $label ); ?>" class="wcgwp-cancel button btn <?php echo esc_attr( $button_class ); ?>" data-dismiss="modal" aria-label="Close">
+						<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'cancel' )); ?>
 					</button>
 				</div>
 				<div class="modal-body">
 					<?php if ( ! apply_filters( 'wcgwp_hide_details', false ) ) { ?>
 						<p class="wcgwp-details">
-							<?php echo WCGWP()->strings->get_string( 'wrap_details' ); ?>
+							<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'wrap_details' )); ?>
 						</p>
 					<?php }
 
@@ -107,9 +107,11 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 								echo wp_kses_post( $price_html );
 							}
 							if ( 'yes' === $show_link ) {
-								echo '</label>' . wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
+								echo '</label>';
+                                The_Gift_Wrapper::wp_kses_wf( $image_output_open . $product_image . $image_output_close );
 							} else {
-								echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close ) . '</label>';
+								The_Gift_Wrapper::wp_kses_wf( $image_output_open . $product_image . $image_output_close );
+                                echo '</label>';
 							}
 							echo '</li>';
 							++$i;
@@ -118,10 +120,10 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 
 					<?php if ( (int) get_option( 'wcgwp_textarea_limit' ) > 0 ) { ?>
 						<div class="wcgwp-note-container">
-							<label for="wcgwp-note-<?php esc_attr_e( $label ); ?>">
-								<?php echo WCGWP()->strings->get_string( 'add_wrap_message' ); ?>
+							<label for="wcgwp-note-<?php echo esc_attr( $label ); ?>">
+								<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_message' )); ?>
 							</label>
-							<textarea name="wcgwp_note" id="wcgwp-note-<?php esc_attr_e( $label ); ?>" maxlength="<?php esc_attr_e( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wcgwp-note"></textarea>
+							<textarea name="wcgwp_note" id="wcgwp-note-<?php echo esc_attr( $label ); ?>" maxlength="<?php echo esc_attr( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wcgwp-note"></textarea>
 						</div>
 					<?php } ?>
 
@@ -131,8 +133,8 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 					<?php do_action( 'wcgwp_before_giftwrap_submit_button' ); ?>
 					<?php wp_nonce_field( 'wcgwp_ajax_wrap', 'wcgwp_nonce-' . esc_attr( $label ) ); ?>
 					<p class="wcgwp-button-wrapper">
-						<button type="button" class="wcgwp-submit button btn alt <?php esc_attr_e( $button_class ); ?>" data-label="<?php esc_attr_e( $label ); ?>">
-							<?php echo WCGWP()->strings->get_string( 'add_wrap_to_order' ); ?>
+						<button type="button" class="wcgwp-submit button btn alt <?php echo esc_attr( $button_class ); ?>" data-label="<?php echo esc_attr( $label ); ?>">
+							<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_to_order' )); ?>
 						</button>
 					</p>
 					<?php do_action( 'wcgwp_after_giftwrap_submit_button' ); ?>

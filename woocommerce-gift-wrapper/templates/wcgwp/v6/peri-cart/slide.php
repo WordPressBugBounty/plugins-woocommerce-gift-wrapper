@@ -19,19 +19,19 @@
 defined( 'ABSPATH' ) || exit;
 $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 ?>
-<div class="wcgwp-wrapper wcgwp-peri-cart wcgwp-wrapper-<?php esc_attr_e( $label ); ?>">
+<div class="wcgwp-wrapper wcgwp-peri-cart wcgwp-wrapper-<?php echo esc_attr( $label ); ?>">
 	<p class="wcgwp-prompt-wrapper">
-        <button type="button" id="wcgwp-slidetoggle-<?php esc_attr_e( $label ); ?>" class="wcgwp-slidetoggle button btn alt <?php esc_attr_e( $button_class ); ?>" data-label="<?php esc_attr_e( $label ); ?>">
-            <?php echo WCGWP()->strings->get_string( 'add_wrap_prompt' ); ?>
+        <button type="button" id="wcgwp-slidetoggle-<?php echo esc_attr( $label ); ?>" class="wcgwp-slidetoggle button btn alt <?php echo esc_attr( $button_class ); ?>" data-label="<?php echo esc_attr( $label ); ?>">
+            <?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_prompt' )); ?>
         </button>
-        <button type="button" id="wcgwp-cancel-<?php esc_attr_e( $label ); ?>" class="wcgwp-slidetoggle wcgwp-cancel button btn <?php esc_attr_e( $button_class ); ?>" data-label="<?php esc_attr_e( $label ); ?>" style="display:none">
-            <?php echo WCGWP()->strings->get_string( 'cancel_wrap' ); ?>
+        <button type="button" id="wcgwp-cancel-<?php echo esc_attr( $label ); ?>" class="wcgwp-slidetoggle wcgwp-cancel button btn <?php echo esc_attr( $button_class ); ?>" data-label="<?php echo esc_attr( $label ); ?>" style="display:none">
+            <?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'cancel_wrap' )); ?>
         </button>
 	</p>
-	<div id="wcgwp-panel-<?php esc_attr_e( $label ); ?>" class="wcgwp-slidedown">
+	<div id="wcgwp-panel-<?php echo esc_attr( $label ); ?>" class="wcgwp-slidedown">
 		<?php if ( ! apply_filters( 'wcgwp_hide_details', false ) ) { ?>
 			<p class="wcgwp-details">
-				<?php echo WCGWP()->strings->get_string( 'wrap_details' ); ?>
+				<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'wrap_details' )); ?>
 			</p>
 		<?php }
 
@@ -94,11 +94,11 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 					}
 					if ( $show_thumbs && 'yes' === $show_link ) {
 						echo '</label><br />';
-						echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
+						The_Gift_Wrapper::wp_kses_wf( $image_output_open . $product_image . $image_output_close );
 						echo '</li>';
 					} else {
 						echo '<br />';
-						echo wp_kses_post( $image_output_open ). $product_image . wp_kses_post( $image_output_close );
+						The_Gift_Wrapper::wp_kses_wf( $image_output_open . $product_image . $image_output_close );
 						echo '</label></li>';
 					}
 				} else {
@@ -113,7 +113,9 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 						echo wp_kses_post( $price_html );
 					}
 					echo '<br />';
-					echo ' </label>' . wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close ) . '</li>';
+					echo ' </label>';
+                    The_Gift_Wrapper::wp_kses_wf( $image_output_open . $product_image . $image_output_close );
+                    echo '</li>';
 					echo '<input type="hidden" name="wcgwp_product_id[]" class="wcgwp-input" data-productid="' . esc_attr( $product->get_id() ) . '" id="' . esc_attr( $slug . "-" . $label ) . '">';
 				}
 				++$i;
@@ -123,18 +125,18 @@ $button_class = wc_wp_theme_get_element_class_name( 'button' ) ?? '';
 
 		<?php if ( (int) get_option( 'wcgwp_textarea_limit' ) > 0 ) { ?>
 			<p class="wcgwp-note-container">
-				<label for="wcgwp-note-<?php esc_attr_e( $label ); ?>">
-					<?php echo WCGWP()->strings->get_string( 'add_wrap_message' ); ?>
+				<label for="wcgwp-note-<?php echo esc_attr( $label ); ?>">
+					<?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_message' )); ?>
 				</label>
-				<textarea name="wcgwp_note" id="wcgwp-note-<?php esc_attr_e( $label ); ?>" maxlength="<?php esc_attr_e( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wcgwp-note"></textarea>
+				<textarea name="wcgwp_note" id="wcgwp-note-<?php echo esc_attr( $label ); ?>" maxlength="<?php echo esc_attr( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wcgwp-note"></textarea>
 			</p>
 		<?php } ?>
 
 		<?php wp_nonce_field( 'wcgwp_ajax_wrap', 'wcgwp_nonce-' . esc_attr( $label ) ); ?>
 		<?php do_action( 'wcgwp_before_giftwrap_submit_button' ); ?>
         <p class="wcgwp-button-wrapper">
-            <button type="button" data-label="<?php esc_attr_e( $label ); ?>" class="wcgwp-submit button btn alt <?php esc_attr_e( $button_class ); ?>" data-label="<?php esc_attr_e( $label ); ?>">
-			    <?php echo WCGWP()->strings->get_string( 'add_wrap_to_order' ); ?>
+            <button type="button" data-label="<?php echo esc_attr( $label ); ?>" class="wcgwp-submit button btn alt <?php echo esc_attr( $button_class ); ?>" data-label="<?php echo esc_attr( $label ); ?>">
+			    <?php The_Gift_Wrapper::wp_kses_wf(WCGWP()->strings->get_string( 'add_wrap_to_order' )); ?>
 		    </button>
         </p>
 		<?php do_action( 'wcgwp_after_giftwrap_submit_button' ); ?>

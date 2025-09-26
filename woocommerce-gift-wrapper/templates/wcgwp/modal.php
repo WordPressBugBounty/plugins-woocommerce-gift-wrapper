@@ -21,14 +21,14 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="giftwrap_header_wrapper">
 	<p class="giftwrap_header">
-        <button type="button" data-toggle="modal" data-target=".giftwrapper_products_modal<?php esc_attr_e( $label ); ?>" class="wcgwp-modal-toggle wcgwp-modal-toggle<?php esc_attr_e( $label ); ?> button btn fusion-button fusion-button-default edgtf-btn" data-label="<?php esc_attr_e( $label ); ?>">
+        <button type="button" data-toggle="modal" data-target=".giftwrapper_products_modal<?php echo esc_attr( $label ); ?>" class="wcgwp-modal-toggle wcgwp-modal-toggle<?php echo esc_attr( $label ); ?> button btn fusion-button fusion-button-default edgtf-btn" data-label="<?php echo esc_attr( $label ); ?>">
             <?php echo wp_kses_post( apply_filters( 'wcgwp_add_wrap_prompt', __( 'Add gift wrap?', 'woocommerce-gift-wrapper' ) ) ); ?>
         </button>
     </p>
 </div>
 
-<div id="giftwrap_modal<?php esc_attr_e( $label ); ?>" class="giftwrapper_products_modal giftwrapper_products_modal<?php esc_attr_e( $label ); ?> fusion-modal modal" tabindex="-1" role="dialog">
-	<div class="modal-dialog <?php echo apply_filters( 'wcgwp_modal_size', 'modal-lg'); ?> modal-dialog-centered" role="document">
+<div id="giftwrap_modal<?php echo esc_attr( $label ); ?>" class="giftwrapper_products_modal giftwrapper_products_modal<?php echo esc_attr( $label ); ?> fusion-modal modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog <?php echo esc_html(apply_filters( 'wcgwp_modal_size', 'modal-lg')); ?> modal-dialog-centered" role="document">
 		<div class="modal-content fusion-modal-content">
 			<div class="modal-header">
 				<button class="giftwrap_cancel button btn fusion-button fusion-button-default edgtf-btn" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><?php echo wp_kses_post( __( 'Cancel', 'woocommerce-gift-wrapper' ) ); ?></span></button>
@@ -94,16 +94,16 @@ defined( 'ABSPATH' ) || exit;
 								echo '<label for="' . esc_attr( $slug . $label ) . '" class="giftwrap_desc"><span class="giftwrap_title"> ' . wp_kses_post( $product->get_title() ) . '</span> ' . wp_kses_post( $price_html );
 								if ( 'yes' === $show_link ) {
 									echo '</label>';
-									echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
+									//echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
 									echo '</li>';
 								} else {
-									echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
+									//echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close );
 									echo '</label></li>';
 								}
 							} else {
 								echo '"><label for="' . esc_attr( $slug . $label ) . '" class="giftwrap_desc singular_label"><span class="giftwrap_title"> ';
 								echo wp_kses_post( $product->get_title() ) . '</span> ' . wp_kses_post( $price_html ) . '</label>';
-								echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close ) . '</li>';
+								//echo wp_kses_post( $image_output_open ) . $product_image . wp_kses_post( $image_output_close ) . '</li>';
 								echo '<input type="hidden" name="wcgwp_product' . esc_attr( $label ) . '" value="' . esc_attr( $product->get_id() ) . '" id="' . esc_attr( $slug . $label ) . '">';
 							} 
 							++$wrap_count;
@@ -112,10 +112,10 @@ defined( 'ABSPATH' ) || exit;
 
 					<?php if ( (int) get_option( 'wcgwp_textarea_limit' ) > 0 ) { ?>
 					<div class="wc_giftwrap_notes_container">
-						<label for="wcgwp_notes<?php esc_attr_e( $label ); ?>">
+						<label for="wcgwp_notes<?php echo esc_attr( $label ); ?>">
 							<?php echo wp_kses_post( apply_filters( 'wcgwp_add_wrap_message', __( 'Add Gift Wrap Message:', 'woocommerce-gift-wrapper' ) ) ); ?>
 						</label>
-						<textarea name="wcgwp_note<?php esc_attr_e( $label ); ?>" id="wcgwp_notes<?php esc_attr_e( $label ); ?>" cols="30" rows="4" maxlength="<?php esc_attr_e( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wc_giftwrap_notes"></textarea>	
+						<textarea name="wcgwp_note<?php echo esc_attr( $label ); ?>" id="wcgwp_notes<?php echo esc_attr( $label ); ?>" cols="30" rows="4" maxlength="<?php echo esc_attr( get_option( 'wcgwp_textarea_limit', '1000' ) ); ?>" class="wc_giftwrap_notes"></textarea>	
 					</div>
 					<?php } ?>
 				</div>
@@ -123,7 +123,7 @@ defined( 'ABSPATH' ) || exit;
 				<div class="modal-footer">
 					<?php do_action( 'wcgwp_before_giftwrap_submit_button' ); ?>
 					<?php wp_nonce_field( 'wcgwp_order_wrap', 'wcgwp_order_wrap_nonce' ); ?>
-					<button type="submit" class="button btn alt giftwrap_submit replace_wrap fusion-button fusion-button-default edgtf-btn" name="wcgwp_submit<?php esc_attr_e( $label ); ?>">
+					<button type="submit" class="button btn alt giftwrap_submit replace_wrap fusion-button fusion-button-default edgtf-btn" name="wcgwp_submit<?php echo esc_attr( $label ); ?>">
 						<?php echo wp_kses_post( apply_filters( 'wcgwp_add_wrap_button_text', __( 'Add Gift Wrap to Order', 'woocommerce-gift-wrapper' ) ) ); ?>
 					</button>
 					<?php do_action( 'wcgwp_after_giftwrap_submit_button' ); ?>

@@ -41,6 +41,7 @@ class WCGWP_Strings {
 				'add_wrap_for_x'    => 'Add gift wrapping for %s?',
 				'add_x'             => 'Add %s?',
 				'add_x_for_x'       => 'Add %s for %s?',
+				'wrap_limit' => 'You can only add %s %s to your cart.',
 				'wrap_details'      => 'We offer the following gift wrap options:',
 				'wrap_offerings'    => 'We offer the following gift wrap options:',
 				'note'              => 'Note',
@@ -70,6 +71,7 @@ class WCGWP_Strings {
 
 		$strings = (array) get_option( 'wcgwp_strings', [] );
 		if ( empty( $strings ) ) {
+			$strings = $this->get_default_strings();
 			$this->save_default_strings();
 		}
 		if ( ! isset( $strings[ $key ] ) ) {
@@ -79,7 +81,7 @@ class WCGWP_Strings {
 		$strings['add_wrap_prompt'] = apply_filters( 'wcgwp_add_wrap_prompt', $strings['add_wrap_prompt'] );
 		$strings['add_wrap_to_order'] = apply_filters( 'wcgwp_add_wrap_button_text', $strings['add_wrap_to_order'] );
 
-		return wp_kses_post( apply_filters( 'wcgwp_filter_string', __( $strings[ $key ], 'woocommerce-gift-wrapper' ) ) );
+		return wp_kses_post( apply_filters( 'wcgwp_filter_string', $strings[$key] ) );
 
 	}
 

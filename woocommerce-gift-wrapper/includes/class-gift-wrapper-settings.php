@@ -25,7 +25,6 @@ class The_Gift_Wrapper_Settings {
 
 		$wcgwp_links = array(
 			sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper' ), esc_html__( 'Settings', 'woocommerce-gift-wrapper' ) ),
-			sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', 'https://paypal.me/littlepackage?country.x=US&locale.x=en_US', esc_html__( 'Donate', 'woocommerce-gift-wrapper' ) ),
 		);
 		return array_merge( $links, $wcgwp_links );
 

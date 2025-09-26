@@ -1,95 +1,117 @@
 <?php
-
 /**
  * Plugin Name: Gift Wrapper
- * Plugin URI: https://www.giftwrapper.app
+ * Plugin URI: https://www.giftwrapper.app/
  * Description: Offer gift wrap options on WooCommerce cart and/or checkout pages. Let customers wrap their orders!
- * Version: 6.31
+ * Version: 6.32
  * WC requires at least: 5.6
  * WC tested up to: 10.1.0
  * Author: WebFactory Ltd
- * Author URI: https://www.webfactoryltd.com
+ * Author URI: https://www.webfactoryltd.com/
  * Text Domain: woocommerce-gift-wrapper
  * Requires Plugins:  woocommerce
  *
- * Gift Wrapper - for WooCommerce - since 2014
- *
- * Copyright: (c) 2025 WebFactory Ltd  (email: support@webfactoryltd.com)
+ * Copyright: (c) 2024-2025 WebFactory Ltd  (email: support@webfactoryltd.com)
  * Copyright: (c) 2014-2024 Little Package
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
-use GiftWrapper\WoocommerceGiftWrapper;
-defined( 'ABSPATH' ) || exit;
-if ( !defined( 'GIFTWRAPPER_VERSION' ) ) {
-    define( 'GIFTWRAPPER_VERSION', '6.31' );
-}
-if ( !defined( 'GIFTWRAPPER_FILE' ) ) {
-    define( 'GIFTWRAPPER_FILE', __FILE__ );
-}
-if ( !defined( 'GIFTWRAPPER_PATH' ) ) {
-    define( 'GIFTWRAPPER_PATH', plugin_dir_path( __FILE__ ) );
-}
-if ( !defined( 'GIFTWRAPPER_URL' ) ) {
-    define( 'GIFTWRAPPER_URL', plugin_dir_url( __FILE__ ) );
-}
-if ( function_exists( 'wcgw_fs' ) ) {
-    wcgw_fs()->set_basename( false, __FILE__ );
-} else {
-    // Create a helper function for easy SDK access.
-    function wcgw_fs() {
-        global $wcgw_fs;
-        if ( !isset( $wcgw_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname( __FILE__ ) . '/vendor/freemius/wordpress-sdk/start.php';
-            $wcgw_fs = fs_dynamic_init( array(
-                'id'             => '16940',
-                'slug'           => 'woocommerce-gift-wrapper',
-                'premium_slug'   => 'woocommerce-gift-wrapper-plus',
-                'type'           => 'plugin',
-                'public_key'     => 'pk_c73db55aecacb0b8300d6a154b066',
-                'is_premium'     => false,
-                'premium_suffix' => 'plus',
-                'has_addons'     => false,
-                'has_paid_plans' => true,
-                'menu'           => array(
-                    'slug'           => 'wc-settings',
-                    'override_exact' => true,
-                    'first-path'     => 'admin.php?page=wc-settings&tab=gift-wrapper',
-                    'support'        => false,
-                    'parent'         => array(
-                        'slug' => 'wc-settings',
-                    ),
-                ),
-                'is_live'        => true,
-            ) );
-        }
-        return $wcgw_fs;
-    }
 
-    // Init Freemius.
-    wcgw_fs();
-    // Signal that SDK was initiated.
-    do_action( 'wcgw_fs_loaded' );
-    require_once __DIR__ . '/vendor/autoload.php';
-    /**
-     * Declare compatibility with HPOS
-     * @return void
-     */
-    add_action( 'before_woocommerce_init', function () {
-        if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-        }
-    } );
-    function wcgw_fs_settings_url() {
-        return admin_url( 'admin.php?page=wc-settings&tab=gift-wrapper' );
-    }
+defined('ABSPATH') || exit;
+if (!defined('GIFTWRAPPER_VERSION')) {
+    define('GIFTWRAPPER_VERSION', '6.32');
+}
+if (!defined('GIFTWRAPPER_FILE')) {
+    define('GIFTWRAPPER_FILE', __FILE__);
+}
 
-    wcgw_fs()->add_filter( 'connect_url', 'wcgw_fs_settings_url' );
-    wcgw_fs()->add_filter( 'after_skip_url', 'wcgw_fs_settings_url' );
-    wcgw_fs()->add_filter( 'after_connect_url', 'wcgw_fs_settings_url' );
-    wcgw_fs()->add_filter( 'after_pending_connect_url', 'wcgw_fs_settings_url' );
-    require_once 'free/woocommerce-gift-wrapper.php';
-    new WoocommerceGiftWrapper();
+if (!defined('GIFTWRAPPER_PATH')) {
+    define('GIFTWRAPPER_PATH', plugin_dir_path(__FILE__));
+}
+
+if (!defined('GIFTWRAPPER_URL')) {
+    define('GIFTWRAPPER_URL', plugin_dir_url(__FILE__));
+}
+
+if ( ! defined( 'GIFTWRAPPER_PLUGIN_FILE' ) ) {
+	define( 'GIFTWRAPPER_PLUGIN_FILE', __FILE__ );
+}
+
+/**
+ * Functions used by plugins
+ */
+if ( ! class_exists( 'WC_Dependencies' ) ) {
+	require_once 'woo-includes/class-wc-dependencies.php';
+}
+
+/**
+ * WooCommerce Detection
+ *
+ * @return boolean
+ */
+if ( ! function_exists( 'is_woocommerce_active' ) ) {
+	function is_woocommerce_active() {
+		return WC_Dependencies::woocommerce_active_check();
+	}
+}
+
+add_action('before_woocommerce_init', function () {
+    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});
+
+/**
+ * Ensure that WooCommerce plugin is active
+ *
+ * @return void
+ */
+if ( ! is_woocommerce_active() ) {
+	add_action( 'admin_notices', 'wcgw_woocommerce_inactive_notice' );
+	return;
+}
+
+/**
+ * Include the main Gift Wrapper class
+ *
+ * @return void
+ */
+if ( ! class_exists( 'The_Gift_Wrapper', false ) ) {
+	try {
+		include_once 'includes/class-gift-wrapper.php';
+	} catch ( Exception $e ) {
+		deactivate_plugins( 'woocommerce-gift-wrapper/woocommerce-gift-wrapper.php' );
+	}
+}
+
+/**
+ * Return the main instance of Gift Wrapper for WooCommerce
+ *
+ * @since  5.2.3
+ * @return object|The_Gift_Wrapper
+ *
+ */
+function WC_Gift_Wrap() {
+	if ( class_exists( 'The_Gift_Wrapper', false ) ) {
+		return The_Gift_Wrapper::instance();
+	}
+}
+
+WC_Gift_Wrap();
+
+/**
+ * Stating the obvious. Can't have Gift Wrapper without WooCommerce
+ *
+ * @return void
+ */
+function wcgw_woocommerce_inactive_notice() { ?>
+
+	<div id="message" class="notice notice-error is-dismissible">
+		<p><?php esc_html_e( 'The WooCommerce plugin must be active in order to activate and use WooCommerce Gift Wrapper.', 'woocommerce-gift-wrapper' ); ?></p>
+	</div>
+
+	<?php
+	deactivate_plugins( 'woocommerce-gift-wrapper/woocommerce-gift-wrapper.php' );
+
 }

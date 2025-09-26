@@ -5,16 +5,16 @@ Tags: woocommerce, wrap, gift, gift wrapper, gift wrap
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 6.8
-Stable tag: 6.31
+Stable tag: 6.32
 License: GPLv3 or later
 
 Holidays and birthdays are always coming! Gift wrap your customer's purchase, per order, on the WooCommerce cart and checkout pages.
 
 == Description ==
 
-The Gift Wrapper treats your gift wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PLUS version of The Gift Wrapper](https://www.giftwrapper.app "Gift Wrapper Plus plugin").
+The <a href="https://www.giftwrapper.app/">Gift Wrapper</a> treats your gift wrapping service as a WooCommerce product, allowing it to be inventoried, priced, discounted and taxed separately. Create and offer as many gift wraps as you like, where you like. Not just for gift wrap - use Gift Wrapper for any (inventoriable, taxable and/or discountable) cart add-ons! Examples: add condiments to a food order, or accessories to an electronics order. If you need more features and functionality such as per-product wrap options, [check out the PRO version of The Gift Wrapper](https://www.giftwrapper.app/ "Gift Wrapper PRO plugin").
 
-= Some Features =
+= Features =
 
 * Create a simple gift wrap (or other add-on type) option form on the cart and/or checkout page, or go all out with robust gift wrapping offerings
 * Set individual prices, descriptions, and images for wrapping types
@@ -28,7 +28,7 @@ The Gift Wrapper treats your gift wrapping service as a WooCommerce product, all
 * Remember the paid version of this plugin (Gift Wrapper PLUS for WooCommerce) has way more features and likely does what you need!
 * If you have suggestions, or find a bug, please get in touch.
 
-= GIFT WRAPPER PLUS (paid version) features =
+= PRO features =
 
 * Per-product gift wrapping modal/slideout options on product pages, or a simple per-product “add gift wrap for $x” checkbox
 * Per-product gift wrapping settings (control offerings per-product)
@@ -42,14 +42,6 @@ The Gift Wrapper treats your gift wrapping service as a WooCommerce product, all
 * Elementor Pro cart/checkout and product page compatibility
  Compatible with WooCommerce Mix and Match Products and WooCommerce Composite Products
 * Compatibility with CartPops AJAX fly-out cart
-
-= Support future development =
-
-Maybe you can **leave a positive review**?
-
-[Please leave a review of the Gift Wrapper free version](https://wordpress.org/support/plugin/woocommerce-gift-wrapper/reviews "Leave a Review of the Gift Wrapper")
-
-[Purchase Gift Wrapper Plus](https://www.giftwrapper.app "Gift Wrapper Plus plugin")
 
 
 == Installation ==
@@ -229,8 +221,6 @@ Most likely this is due to your Wordpress theme conflicting with this plugin. Of
 = This plugin doesn't look good or work with my theme =
 [Learn more about possible theme issues](https://www.giftwrapper.app/documentation/#theme-issues). Gift Wrapper works with many themes, both paid and free, and is offered gratis and as is. Some themes just require very minor tweaking with a line or two of CSS for cooperation. If you have suggestions for how to make it work every time for your theme, we will consider hard-coding in your theme fixes. However, we are not responsible nor for hire to make this plugin work with every theme out there. Thank you for understanding.
 
-= Other problem =
-Please [write for support](https://wordpress.org/support/plugin/woocommerce-gift-wrapper/) before leaving negative feedback! Tickets usually get replies within 24-48 hours. This [pinned ticket contains solid advice](https://wordpress.org/support/topic/before-you-post-please-read/) about how to troubleshoot further, and how to request help (to get quick help).
 
 == Screenshots ==
 
@@ -248,6 +238,10 @@ Please [write for support](https://wordpress.org/support/plugin/woocommerce-gift
 * New v6 templates allow for AJAX add gift wrap to cart, more seamless transition to Gift Wrapper Plus. If you are using Gift Wrapper template overrides in your theme, you will want to make backups and update to 6.0 with caution, testing the cart with your theme overrides.
 
 == Changelog ==
+= 6.32 - 26.09.2025 =
+* Code cleanup
+* Removed Freemius
+
 = 6.31 - 11.09.2025 =
 * Translation string bug fix
 
