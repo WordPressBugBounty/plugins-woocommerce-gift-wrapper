@@ -11,7 +11,7 @@
  * Text Domain: woocommerce-gift-wrapper
  * Requires Plugins:  woocommerce
  *
- * Copyright: (c) 2024-2025 WebFactory Ltd  (email: support@webfactoryltd.com)
+ * Copyright: (c) 2024-2026 WebFactory Ltd  (email: support@webfactoryltd.com)
  * Copyright: (c) 2014-2024 Little Package
  *
  * License: GNU General Public License v3.0
